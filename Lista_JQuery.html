@@ -9,18 +9,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
     <ol id="lista_animes">
-      <li id="Elemento_Nuevo"> Nanatsu no Taizai <button >delete</button></li>
-      <li id="Elemento_Nuevo"> Boku no Hero Academia <button >delete</button></li>
+      <li id="Elemento1"> Nanatsu no Taizai <button >delete</button></li>
+      <li id="Elemento2"> Boku no Hero Academia <button >delete</button></li>
     </ol>
     <input id="texto" type="text" name="newEl"/>
     <button onclick="addElem()"> Add Element </button>
 
     <script type="text/javascript">
+        var i =localStorage.length +1;
+        console.log(i);
+        localStorage.setItem("Elemento1",$("#Elemento1").val());
+        localStorage.setItem("Elemento2",$("#Elemento2").val());
         function addElem() {
-          var texto=$("#texto").val();
-          var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
-          ElementoNuevo.id="Elemento_Nuevo";
 
+
+          var texto = $("#texto").val();
+          var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
+          ElementoNuevo.id=i;
+          for (var j = 0; j < localStorage.length; j++) {
+    
+          }
+          i++;
           $("#lista_animes").append(ElementoNuevo);
         };
         $("#lista_animes").on("click","button",function(){
@@ -29,3 +38,6 @@
       </script>
   </body>
 </html>
+
+
+aa
