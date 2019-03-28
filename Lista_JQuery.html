@@ -9,35 +9,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
     <ol id="lista_animes">
-      <li id="Elemento1"> Nanatsu no Taizai <button >delete</button></li>
-      <li id="Elemento2"> Boku no Hero Academia <button >delete</button></li>
+
     </ol>
     <input id="texto" type="text" name="newEl"/>
     <button onclick="addElem()"> Add Element </button>
 
     <script type="text/javascript">
         var i =localStorage.length +1;
-        console.log(i);
+        console.log("Local: "+localStorage.length);
         localStorage.setItem("Elemento1",$("#Elemento1").val());
         localStorage.setItem("Elemento2",$("#Elemento2").val());
+
+
+        function pinta(){
+          for(var key in localStorage){
+            var Elementos_Iniciales = $("<li>" + localStorage.getItem(key) + " <button>Eliminar</button></li>");
+            console.log("Hola: "+Elementos_Iniciales);
+            $("#lista_animes").append(Elementos_Iniciales);
+          }
+        };
         function addElem() {
-
-
           var texto = $("#texto").val();
           var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
-          ElementoNuevo.id=i;
-          for (var j = 0; j < localStorage.length; j++) {
-    
-          }
+          ElementoNuevo.attr("id", i);
+          localStorage.setItem(i, texto);
           i++;
-          $("#lista_animes").append(ElementoNuevo);
+          pinta();
         };
         $("#lista_animes").on("click","button",function(){
-            $(this).closest("li").remove();
+          localStorage.removeItem(valor);
+          $(this).closest("li").remove();
         });
+
       </script>
   </body>
 </html>
-
-
-aa
