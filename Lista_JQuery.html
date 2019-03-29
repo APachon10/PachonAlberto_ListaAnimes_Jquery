@@ -20,12 +20,13 @@
 
         function update(){
           pinta();
-          $("#texto").val();
+          $("#texto").empty();
         };
         function pinta(){
           $("#lista_animes").empty();
           for(var key in localStorage){
-            var Elementos_Iniciales = $("<li>" + localStorage.getItem(key) + " <button>Delete</button></li>");
+            var valores = localStorage.getItem(key);
+            var Elementos_Iniciales = $("<li>" + valores + " <button>Delete</button></li>");
             $("#lista_animes").append(Elementos_Iniciales);
           }
         };
@@ -37,13 +38,12 @@
           $("#lista_animes").append(ElementoNuevo);
           i++;
         };
-
         $("#lista_animes").on("click","button",function(){
           var valor = $(this).closest("li").text();
 				  var SubString = valor.substr(0, valor.length-6);
 
           for (var  key in localStorage){
-            if (SubString = localStorage.getItem(key)) {
+            if (SubString = valor) {
                 localStorage.removeItem(key);
             }
           }
