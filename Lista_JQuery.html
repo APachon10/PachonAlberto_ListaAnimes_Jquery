@@ -8,23 +8,24 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
-    <ol id="lista_animes">
+    <ol id="lista_animes"></ol>
 
-    </ol>
     <input id="texto" type="text" name="newEl"/>
+
     <button onclick="addElem()"> Add Element </button>
+    <button onclick ="pinta()"> Refresh </button>
 
     <script type="text/javascript">
-        var i =localStorage.length +1;
-        console.log("Local: "+localStorage.length);
-        localStorage.setItem("Elemento1",$("#Elemento1").val());
-        localStorage.setItem("Elemento2",$("#Elemento2").val());
+        var i =localStorage.length;
 
-
+        function update(){
+          pinta();
+          $("#texto").val();
+        };
         function pinta(){
+          $("#lista_animes").empty();
           for(var key in localStorage){
-            var Elementos_Iniciales = $("<li>" + localStorage.getItem(key) + " <button>Eliminar</button></li>");
-            console.log("Hola: "+Elementos_Iniciales);
+            var Elementos_Iniciales = $("<li>" + localStorage.getItem(key) + " <button>Delete</button></li>");
             $("#lista_animes").append(Elementos_Iniciales);
           }
         };
@@ -33,14 +34,21 @@
           var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
           ElementoNuevo.attr("id", i);
           localStorage.setItem(i, texto);
+          $("#lista_animes").append(ElementoNuevo);
           i++;
-          pinta();
         };
-        $("#lista_animes").on("click","button",function(){
-          localStorage.removeItem(valor);
-          $(this).closest("li").remove();
-        });
 
+        $("#lista_animes").on("click","button",function(){
+          var valor = $(this).closest("li").text();
+				  var SubString = valor.substr(0, valor.length-6);
+
+          for (var  key in localStorage){
+            if (SubString = localStorage.getItem(key)) {
+                localStorage.removeItem(key);
+            }
+          }
+  				$(this).closest("li").remove();
+        });
       </script>
   </body>
 </html>
