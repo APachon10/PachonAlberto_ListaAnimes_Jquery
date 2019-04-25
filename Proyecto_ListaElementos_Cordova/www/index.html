@@ -1,19 +1,31 @@
 <html>
   <head>
-    <title> Lista Animes </title>
+    <title> Anichart </title>
     <style>
       #lista_animes{
         background-color: orange;
       }
+	  #Boton_Insertar{
+		background-color: black;
+		color: white;
+	  }
+	   #Boton_Update{
+		background-color: white;
+		color: black;
+	  }
+	  #cuerpo{
+		background-image : url("https://i.ytimg.com/vi/xA7UA2uGnxU/maxresdefault.jpg");
+	  }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
+  <body id="cuerpo">
     <ol id="lista_animes"></ol>
 
     <input id="texto" type="text" name="newEl"/>
 
-    <button onclick="addElem()"> Add Element </button>
-    <button onclick ="pinta()"> Refresh </button>
+    <button id ="Boton_Insertar" onclick="addElem()"> Add Element </button>
+    <button id = "Boton_Update "onclick ="pinta()"> Refresh </button>
 
     <script type="text/javascript">
         var i =localStorage.length;
@@ -28,7 +40,6 @@
 				var Elementos_Iniciales = $("<li>" + valores + "<button>Delete</button></li>");
 				$("#lista_animes").append(Elementos_Iniciales);
 			}
-			
           }
         };
 		function update(){
