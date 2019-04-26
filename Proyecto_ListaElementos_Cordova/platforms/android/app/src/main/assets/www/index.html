@@ -26,16 +26,16 @@
 
     <input id="texto" type="text" name="newEl"/>
 
-    <button id ="Boton_Insertar" onclick="addElem()"> Add Element </button>
-    <button id = "Boton_Update "onclick ="pinta()"> Refresh </button>
+    <button id ="Boton_Insertar"> Add Element </button>
+    <button id = "Boton_Update"> Refresh </button>
 
     <script type="text/javascript">
         var i =localStorage.length;
-        
+
 		function pinta(){
 		  alert("Hay un total de "+ localStorage.length + " Elementos en la local Storage ");
           $("#lista_animes").empty();
-          
+
 		  for(var key in localStorage){
 			if(localStorage.getItem(key) != null){
 				var valores = localStorage.getItem(key);
@@ -44,7 +44,7 @@
 			}
           }
         };
-		function update(){
+		    function update(){
           pinta();
         };
         function addElem() {
@@ -54,7 +54,7 @@
 		  i++;
           localStorage.setItem(i, texto);
           $("#lista_animes").append(ElementoNuevo);
-          
+
         };
         $("#lista_animes").on("click","button",function(){
           var valor = $(this).closest("li").text();
@@ -65,6 +65,10 @@
             }
           }
 		  $(this).closest("li").remove();
+        });
+        $(document).ready( function ()  {
+            $("#Boton_Insertar").click(addElem);
+            $("#Boton_Update").click(update);
         });
       </script>
   </body>
