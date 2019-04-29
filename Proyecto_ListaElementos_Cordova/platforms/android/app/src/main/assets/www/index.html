@@ -28,8 +28,7 @@
 
     <button id ="Boton_Insertar"> Add Element </button>
     <button id = "Boton_Update"> Refresh </button>
-
-    <script type="text/javascript">
+  <script type="text/javascript">
         var i =localStorage.length;
 
 		function pinta(){
@@ -39,8 +38,7 @@
 		  for(var key in localStorage){
 			if(localStorage.getItem(key) != null){
 				var valores = localStorage.getItem(key);
-				var Elementos_Iniciales = $("<li>" + valores + "<button>Delete</button></li>");
-				$("#lista_animes").append(Elementos_Iniciales);
+				$("#lista_animes").append("<li>" + valores + "<button>Delete</button>"+"</li>");
 			}
           }
         };
@@ -73,4 +71,5 @@
         });
       </script>
   </body>
+  
 </html>
