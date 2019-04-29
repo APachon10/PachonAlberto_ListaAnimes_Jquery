@@ -39,8 +39,7 @@
 		  for(var key in localStorage){
 			if(localStorage.getItem(key) != null){
 				var valores = localStorage.getItem(key);
-				var Elementos_Iniciales = $("<li>" + valores + "<button>Delete</button></li>");
-				$("#lista_animes").append(Elementos_Iniciales);
+				$("#lista_animes").append("<li>" + valores + "<button>Delete</button>"+"</li>");
 			}
           }
         };
