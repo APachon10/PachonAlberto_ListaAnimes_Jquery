@@ -61,9 +61,11 @@
 		  for (var  key in localStorage){
 			if (SubString == localStorage.getItem(key)) {
 				localStorage.removeItem(key);
+				
             }
           }
 		  $(this).closest("li").remove();
+		  alert("Elemento  Eliminado");
         });
         $(document).ready( function ()  {
             $('#Boton_Insertar').click(addElem);
