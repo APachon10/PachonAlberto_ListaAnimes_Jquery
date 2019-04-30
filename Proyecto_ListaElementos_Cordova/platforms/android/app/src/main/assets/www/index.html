@@ -50,9 +50,14 @@
           var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
           ElementoNuevo.attr("id", i);
 		  i++;
-          localStorage.setItem(i, texto);
-          $("#lista_animes").append(ElementoNuevo);
-			$("#texto").val("");
+          
+		  if(texto == ""){
+			alert("Campo Vacio");
+		  }else{
+			$("#lista_animes").append(ElementoNuevo);
+			localStorage.setItem(i, texto);
+		  }
+		$("#texto").val("");
 
         };
         $("#lista_animes").on("click","button",function(){
