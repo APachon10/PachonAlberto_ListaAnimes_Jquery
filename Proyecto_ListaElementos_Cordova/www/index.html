@@ -29,8 +29,10 @@
     <button id ="Boton_Insertar"> Add Element </button>
     <button id = "Boton_Update"> Refresh </button>
   <script type="text/javascript">
-        var i =localStorage.length;
-
+        var longitud =localStorage.length;
+		var j = 0;
+		
+		<!-- Funcion con la cual actualizas la lista de la local Storage  -->
 		function pinta(){
 		  alert("Hay un total de "+ localStorage.length + " Elementos en la local Storage ");
           $("#lista_animes").empty();
@@ -42,23 +44,23 @@
 			}
           }
         };
-		    function update(){
-          pinta();
-        };
         function addElem() {
+		  <!-- Cogemos el valor del Input-->
 		  var texto = $("#texto").val();
+
           var ElementoNuevo = $("<li>"+texto+" "+"<button> Delete </button>"+"</li>");
-          ElementoNuevo.attr("id", i);
-		  i++;
-          
+          <!--Le ponemos una id al nuevo Elemento -->
+		  ElementoNuevo.attr("id", longitud);
+		  longitud++;
+		  <!--Si el campo esta vacio no se añade ningun elemento a la lista ni a la local Storage-->
 		  if(texto == ""){
 			alert("Campo Vacio");
 		  }else{
+		    <!-- Añadimos el elemento a la lista y lo metemos dentro de la local Storage  -->
 			$("#lista_animes").append(ElementoNuevo);
 			localStorage.setItem(i, texto);
 		  }
 		$("#texto").val("");
-
         };
         $("#lista_animes").on("click","button",function(){
           var valor = $(this).closest("li").text();
@@ -66,7 +68,6 @@
 		  for (var  key in localStorage){
 			if (SubString == localStorage.getItem(key)) {
 				localStorage.removeItem(key);
-				
             }
           }
 		  $(this).closest("li").remove();
@@ -74,7 +75,7 @@
         });
         $(document).ready( function ()  {
             $('#Boton_Insertar').click(addElem);
-            $('#Boton_Update').click(update);
+            $('#Boton_Update').click(pinta);
         });
       </script>
   </body>
