@@ -64,6 +64,7 @@
         $("#lista_animes").on("click","button",function(){
           var valor = $(this).closest("li").text();
 		  var SubString = valor.substr(0, valor.length-1);
+		 
 		  var Lista_Elementos = Object.keys(localStorage);
 		  
 		  for (var  key in localStorage){
