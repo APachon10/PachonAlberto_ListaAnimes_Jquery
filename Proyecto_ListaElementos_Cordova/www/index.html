@@ -31,6 +31,14 @@
   <script type="text/javascript">
         var longitud =localStorage.length;
 		
+		<!-- Printamos los Elementos Que hay en la local Storage al ABrir la pagina --> 
+		  for(var key in localStorage){
+			if(localStorage.getItem(key) != null){
+				var valores = localStorage.getItem(key);
+				$("#lista_animes").append("<li>" + valores + "<button>X</button>"+"</li>");
+			}
+          }
+		
 		<!-- Funcion con la cual actualizas la lista de la local Storage  -->
 		function pinta(){
 		  alert("Hay un total de "+ localStorage.length + " Elementos en la local Storage ");
@@ -53,29 +61,38 @@
 		  longitud++;
 		  <!--Si el campo esta vacio no se añade ningun elemento a la lista ni a la local Storage-->
 		  if(texto == ""){
-			alert("Campo Vacio");
+			alert("Campo Vacio , Introduce algun valor ");
 		  }else{
 		    <!-- Añadimos el elemento a la lista y lo metemos dentro de la local Storage  -->
 			$("#lista_animes").append(ElementoNuevo);
 			localStorage.setItem(longitud, texto);
+			alert("Elemento Insertado y Registrado dentro de la localStorage");
 		  }
-		$("#texto").val("");
+		  <!--  Ponemos el campo de texto en Blanco-->
+		  $("#texto").val("");
         };
         $("#lista_animes").on("click","button",function(){
           var valor = $(this).closest("li").text();
 		  var SubString = valor.substr(0, valor.length-1);
-		 
-		  var Lista_Elementos = Object.keys(localStorage);
+		  
+		  var lista_animes = Object.keys(localStorage);
 		  
 		  for (var  key in localStorage){
-			if (SubString == localStorage.getItem(key)) {
-				localStorage.removeItem(Lista_Elementos[key]);
+			<!-- Cogemos los Elementos que hay dentro de la localStorage -->
+			var Elemento_a_Eliminar = localStorage.getItem(localStorage.key(key));
+			<!-- Comparamos dichos Elementos con el Substring que hemos conseguido anteriormente -->
+			<!-- Si este substring coincide con alguna de las id que tenemos lo elimina de la local Storage y lo saca de la lista -->
+			if (SubString == Elemento_a_Eliminar) {
+				localStorage.removeItem(lista_animes[key]);
 				alert("Elemento  Eliminado");
-            }
+			}
           }
+		 
+		  <!-- Quitamos el Elemento de la lista -->s
 		  $(this).closest("li").remove();
 		  
         });
+		<!-- Llamamos a las funciones -->
         $(document).ready( function ()  {
             $('#Boton_Insertar').click(addElem);
             $('#Boton_Update').click(pinta);
