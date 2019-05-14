@@ -49,15 +49,16 @@
 		  <!-- Al li le ligamos el boton que acabamos de crear --> 
 		  ElementoNuevo.appendChild(boton_Delete);
           <!--Le ponemos una id al nuevo Elemento -->
-		  ElementoNuevo.setAttribute("id",longitud);
+		  ElementoNuevo.id = longitud;
 		  <!-- Aumentamos la Capacidad de la localStorage-->
-		  longitud++;
+		
 		  
 		  <!--Si el campo esta vacio no se añade ningun elemento a la lista ni a la local Storage-->
 		  if(texto == ""){
 			alert("Campo Vacio , Introduce algun valor ");
 		  }else{
 		    <!-- Añadimos el elemento a la lista y lo metemos dentro de la local Storage  -->
+			longitud++;
 			localStorage.setItem(longitud, texto);
 			lista_animes.appendChild(ElementoNuevo);
 			alert("Elemento Insertado y Registrado dentro de la localStorage");
