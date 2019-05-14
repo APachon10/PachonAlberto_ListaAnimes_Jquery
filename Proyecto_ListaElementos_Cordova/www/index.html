@@ -30,21 +30,8 @@
     <button id = "Boton_Update"> Refresh </button>
   <script type="text/javascript">
         var longitud =localStorage.length;
-		var id_boton_Delete =0;
 		
-		<!-- Funcion con la cual actualizas la lista de la local Storage  -->
-		function ActualizarLista(){
-		  alert("Hay un total de "+ localStorage.length + " Elementos en la local Storage ");
-          $("#lista_animes").empty();
-
-		  for(var key in localStorage){
-			if(localStorage.getItem(key) != null){
-				var valores = localStorage.getItem(key);
-				$("#lista_animes").append("<li>" + valores + "<button>X</button>"+"</li>");
-			}
-          }
-        };
-        
+		
 		function insertarElemento() {
 		  var lista_animes = document.getElementById("lista_animes");
 		  <!-- Cogemos el valor del Input-->
@@ -54,10 +41,7 @@
 		  var boton_Delete = document.createElement("button");
 		  <!-- Le ponemos una cadena al boton -->
 		  boton_Delete.innerHTML = "X";
-		  <!-- Le ponemos un id al boton -->
-		  boton_Delete.setAttribute("id_boton",id_boton_Delete);
-		  id_boton_Delete++;
-		  
+
 		  <!-- Creamos un Nuevo Li -->
           var ElementoNuevo = document.createElement("li");
 		  <!-- Le asignamos al li el texto que hemos puesto en el input -->
@@ -74,8 +58,8 @@
 			alert("Campo Vacio , Introduce algun valor ");
 		  }else{
 		    <!-- Añadimos el elemento a la lista y lo metemos dentro de la local Storage  -->
-			lista_animes.appendChild(ElementoNuevo);
 			localStorage.setItem(longitud, texto);
+			lista_animes.appendChild(ElementoNuevo);
 			alert("Elemento Insertado y Registrado dentro de la localStorage");
 		  }
 		  
@@ -83,7 +67,7 @@
 		  $("#texto").val("");
 		  
 		};
-		function DeleteElement(longitud){
+		function DeleteElement(){
 			<!-- Cogemos el valor del Li que esta mas proximo al boton -->
 			var valor = $(this).closest("li").text();
 			<!-- Hacemos un Split del valor para dividir el boton y el li -->
@@ -91,14 +75,24 @@
 			<!-- creamos una variable que contiene solo el valor del LI -->
 			var nombre_Elemento = Elemento_divido[0]; 
 			
-			localStorage.removeItem(localStorage.key(longitud));
+			localStorage.removeItem(localStorage.key("id"));
 			$(this).closest("li").remove();
 			alert("Elemento Eliminado");
 		};
 		<!-- Llamamos a las funciones -->
         $(document).ready( function ()  {
-            $('#Boton_Insertar').click(insertarElemento)
-            $('#Boton_Update').click(ActualizarLista);
+			
+            $('#Boton_Insertar').click(insertarElemento);
+			$("#cuerpo").on("click","#Boton_Update",function(){
+				$("#lista_animes").empty();
+				alert("Hay un total de : " +localStorage.length+" Elementos en la localStorage");
+				for(var key in localStorage){
+					if(localStorage.getItem(key) != null){
+						var valores = localStorage.getItem(key);
+						$("#lista_animes").append("<li>" + valores + "<button>X</button>"+"</li>");
+					}
+				}
+			});
 			$("#lista_animes").on("click","button",DeleteElement);
         });
       </script>
