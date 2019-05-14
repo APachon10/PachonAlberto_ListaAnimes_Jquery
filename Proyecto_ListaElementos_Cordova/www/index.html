@@ -83,19 +83,17 @@
 		  $("#texto").val("");
 		  
 		};
-        function DeleteElement(id){
-		  var txt = $(this).closest("li").text();
-		  var substr = txt.substr(0, txt.length-1);
-		  
-		  for(var i=0;i<localStorage.length-1;i++){
-			id = localStorage.key(i);
-			var Elemento_a_Eliminar = localStorage.getItem(localStorage.key(i));
-			if (Elemento_a_Eliminar == substr){
-				localStorage.removeItem(id);
-			}
-		  }
-		  alert("Elemento  Eliminado");
-		  <!-- Quitamos el Elemento de la lista -->
+		function DeleteElement(longitud){
+			<!-- Cogemos el valor del Li que esta mas proximo al boton -->
+			var valor = $(this).closest("li").text();
+			<!-- Hacemos un Split del valor para dividir el boton y el li -->
+			var Elemento_divido = valor.split("");
+			<!-- creamos una variable que contiene solo el valor del LI -->
+			var nombre_Elemento = Elemento_divido[0]; 
+			
+			localStorage.removeItem(localStorage.key(longitud));
+			$(this).closest("li").remove();
+			alert("Elemento Eliminado");
 		};
 		<!-- Llamamos a las funciones -->
         $(document).ready( function ()  {
