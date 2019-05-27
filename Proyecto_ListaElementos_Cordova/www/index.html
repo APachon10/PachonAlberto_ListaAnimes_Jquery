@@ -29,9 +29,8 @@
     <button id ="Boton_Insertar"> Add Element </button>
     <button id = "Boton_Update"> Refresh </button>
   <script type="text/javascript">
-		var longitud =localStorage.length;
-        
-		function insertarElemento() {	  
+		function insertarElemento() {	
+          var longitud =localStorage.length;
 		  var lista_animes = document.getElementById("lista_animes");
 		  <!-- Cogemos el valor del Input-->
 		  var texto = $("#texto").val();
@@ -66,37 +65,39 @@
 		  $("#texto").val("");
 		  
 		};
-		function DeleteElement(){
-			<!-- Cogemos el valor del Li que esta mas proximo al boton -->
-			var valor = $(this).closest("li").text();
+		function DeleteElement(id){
+            id = $(this).parent().text();
 			<!-- Hacemos un Split del valor para dividir el boton y el li -->
-			var Elemento_divido = valor.split("");
+			var Elemento_divido = id.split("");
 			<!-- creamos una variable que contiene solo el valor del LI -->
 			var nombre_Elemento = Elemento_divido[0]; 
-			
+            
 			var lista = Object.keys(localStorage);
-			
-			for (var i = 0; i < localStorage.length; i++){
-				var Elemento_a_Eliminar = localStorage.getItem(localStorage.key(i));
-				if (Elemento_a_Eliminar == nombre_Elemento){
-					localStorage.removeItem(lista[i]);
-				}
-			} 
-			$(this).closest("li").remove();
+			localStorage.removeItem(localStorage.key(id));
+			$("#lista_animes id").remove();
 			alert("Elemento Eliminado");
 			
 		};
+        function OrdenarLocalStorage(){
+           if(localStorage.length > 0){
+              var localStorageArray = new Array();
+              for (var i=0;i<localStorage.length;i++){
+                  localStorageArray[i] = localStorage.key(i)+localStorage.getItem(localStorage.key(i));
+              }
+           }
+           var sortedArray = localStorageArray.sort();
+           return sortedArray;
+        }
 		<!-- Llamamos a las funciones -->
         $(document).ready( function ()  {
             $('#Boton_Insertar').click(insertarElemento);
 			$("#cuerpo").on("click","#Boton_Update",function(){
-				$("#lista_animes").empty();
+                $("#lista_animes").empty();
+                var lista = OrdenarLocalStorage();
 				alert("Hay un total de : " +localStorage.length+" Elementos en la localStorage");
-				for(key in localStorage){
-					if(localStorage.getItem(key) != null){
-						var valores = localStorage.getItem(key);
-						$("#lista_animes").append("<li>" + valores + "<button>X</button>"+"</li>");
-					}
+                
+				for(var i=0;i<lista.length;i++){
+				    $("#lista_animes").append("<li>" + lista[i] + "<button>X</button>"+"</li>");
 				}
 			});
 			$("#lista_animes").on("click","button",DeleteElement);
