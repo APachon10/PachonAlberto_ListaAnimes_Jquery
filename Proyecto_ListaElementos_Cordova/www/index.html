@@ -38,7 +38,7 @@
 		  <!-- Creamos el Boton -->
 		  var boton_Delete = document.createElement("button");
 		  <!-- Le ponemos una cadena al boton -->
-		  boton_Delete.innerHTML = "X";
+		  boton_Delete.innerHTML = "Eliminar ";
 		  
 		  <!-- Creamos un Nuevo Li -->
           var ElementoNuevo = document.createElement("li");
@@ -66,23 +66,20 @@
 		  
 		};
 		function DeleteElement(id){
-            id = $(this).parent().text();
+            id = $(this).parent().attr("id");
+            var lista_ordenada = OrdenarLocalStorage();
+            var valor =$(this).parent().text();
 			<!-- Hacemos un Split del valor para dividir el boton y el li -->
-			var Elemento_divido = id.split("");
+			var Elemento_divido = valor.split("");
 			<!-- creamos una variable que contiene solo el valor del LI -->
-			var nombre_Elemento = Elemento_divido[0]; 
-            
-			var lista = Object.keys(localStorage);
-			localStorage.removeItem(localStorage.key(id));
-			$("#lista_animes id").remove();
-			alert("Elemento Eliminado");
-			
+			var nombre_Elemento = Elemento_divido[0];	
+            localStorage.removeItem(localStorage.key(id));
 		};
         function OrdenarLocalStorage(){
            if(localStorage.length > 0){
               var localStorageArray = new Array();
               for (var i=0;i<localStorage.length;i++){
-                  localStorageArray[i] = localStorage.key(i)+localStorage.getItem(localStorage.key(i));
+                  localStorageArray[i] =localStorage.getItem(localStorage.key(i));
               }
            }
            var sortedArray = localStorageArray.sort();
@@ -97,7 +94,11 @@
 				alert("Hay un total de : " +localStorage.length+" Elementos en la localStorage");
                 
 				for(var i=0;i<lista.length;i++){
-				    $("#lista_animes").append("<li>" + lista[i] + "<button>X</button>"+"</li>");
+                    if(lista[i]!="undefined"){
+                        $("#lista_animes").append("<li>" + lista[i] + "<button>X</button>"+"</li>");
+                    }else{
+                        alert("No hay ningun Elemento dentro de la localStorage");
+                    }
 				}
 			});
 			$("#lista_animes").on("click","button",DeleteElement);
